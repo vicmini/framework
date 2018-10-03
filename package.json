@@ -1,0 +1,43 @@
+{
+  "name": "framework",
+  "version": "1.0.0",
+  "description": "前端架构",
+  "main": "index.js",
+  "scripts": {
+    "start:server": "gulp",
+    "docs":"jsdoc ./src/nodeuii/**/*.js -d ./docs/nodeuii",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vicmini/framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vicmini/framework/issues"
+  },
+  "homepage": "https://github.com/vicmini/framework#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "cross-env": "^5.2.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-plumber": "^1.2.0",
+    "gulp-watch": "^5.0.1",
+    "jsdoc": "^3.5.5",
+    "nodemon": "^1.18.4",
+    "supervisor": "^0.12.0"
+  },
+  "dependencies": {
+    "co": "^4.6.0",
+    "koa": "^2.5.3",
+    "koa-router": "^7.4.0",
+    "koa-swig": "^2.2.1",
+    "lodash": "^4.17.11"
+  }
+}
