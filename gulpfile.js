@@ -12,7 +12,7 @@ const gulp = require('gulp'),
 
 // 开发环境build服务端的脚本
 gulp.task('build:dev', () => {
-  gulp.src('./src/nodeuii/**/*.js')
+  gulp.src('./src/serve/**/*.js')
     .pipe(plumber())
     // .pipe(shell('npm run lint:fix'))
     .pipe(eslint())
@@ -31,10 +31,10 @@ gulp.task('build:dev', () => {
 
 // 生产环境build服务端的脚本
 gulp.task('build:prod', () => {
-  gulp.src('./src/nodeuii/**/*.js')
+  gulp.src('./src/serve/**/*.js')
     .pipe(babel({
       'babelrc': false,
-      'ignore': ['./src/nodeuii/config/*.js'], // 配置文件使用流清洗
+      'ignore': ['./src/serve/config/*.js'], // 配置文件使用流清洗
       'plugins': [
         'transform-es2015-modules-commonjs',
         ['@babel/plugin-proposal-decorators', {
@@ -53,7 +53,7 @@ gulp.task('start:dev', function () {
     'env': {
       'NODE_ENV': 'development'
     },
-    'watch': ['./src/nodeuii'],
+    'watch': ['./src/serve'],
     'tasks': ['build:dev']
   });
 });
@@ -61,12 +61,12 @@ gulp.task('start:dev', function () {
 // config配置文件流清洗
 gulp.task('clean:config', () => {
   //glob.sync(pattern, [options])
-  gulp.src('./src/nodeuii/**/*.js')
+  gulp.src('./src/serve/**/*.js')
     .pipe(rollup({
       'output': {
         'format': 'cjs'
       },
-      'input': glob.sync('./src/nodeuii/config/*.js'),
+      'input': glob.sync('./src/serve/config/*.js'),
       'plugins': [
         replace({
           'process.env.NODE_ENV': JSON.stringify('production')

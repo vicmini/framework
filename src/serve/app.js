@@ -25,19 +25,19 @@ const app = new Koa();
 // 错误处理 log4js日志
 log4js.configure({
   'appenders': {
-    'nodeuii': {
+    'serve': {
       'type': 'file',
       'filename': path.join(__dirname, 'logs/node-app.log')
     }
   },
   'categories': {
     'default': {
-      'appenders': ['nodeuii'],
+      'appenders': ['serve'],
       'level': 'error'
     }
   }
 });
-ErrorHandle.error(app, log4js.getLogger('nodeuii'));
+ErrorHandle.error(app, log4js.getLogger('serve'));
 
 // 静态资源
 app.use(serve(
