@@ -4,7 +4,7 @@
  * @classdesc 生成一段异步数据
  * @class IndexModel
  */
-export class IndexModel {
+export default class IndexModel {
   /**
    * @classdesc Creates an instance of IndexModel.
    * @param {*}

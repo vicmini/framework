@@ -8,7 +8,7 @@ const gulp = require('gulp'),
   glob = require('glob'),
   gulpSequence = require('gulp-sequence'),
   eslint = require('gulp-eslint');
-  // shell = require('gulp-shell');
+// shell = require('gulp-shell');
 
 // 开发环境build服务端的脚本
 gulp.task('build:dev', () => {
@@ -20,7 +20,11 @@ gulp.task('build:dev', () => {
     .pipe(eslint.failAfterError())
     .pipe(babel({
       'babelrc': false, // 不采用.babelrc的配置
-      'plugins': ['transform-es2015-modules-commonjs']
+      'plugins': ['transform-es2015-modules-commonjs',
+        ['@babel/plugin-proposal-decorators', {
+          'legacy': true
+        }]
+      ]
     }))
     .pipe(gulp.dest('dist'));
 });
@@ -31,7 +35,13 @@ gulp.task('build:prod', () => {
     .pipe(babel({
       'babelrc': false,
       'ignore': ['./src/nodeuii/config/*.js'], // 配置文件使用流清洗
-      'plugins': ['transform-es2015-modules-commonjs']
+      'plugins': [
+        'transform-es2015-modules-commonjs',
+        ['@babel/plugin-proposal-decorators', {
+          'legacy': true,
+          'decoratorsBeforeExport':true
+        }]
+      ]
     }));
 });
 

@@ -1,20 +1,27 @@
 import Koa from 'koa';
-import Router from 'koa-router';
+// import Router from 'koa-router';
 import render from 'koa-swig';
 import serve from 'koa-static';
 import log4js from 'log4js';
 import co from 'co';
 import path from 'path';
+import {
+  createContainer,
+  Lifetime
+} from 'awilix';
+import {
+  scopePerRequest,
+  loadControllers
+} from 'awilix-koa';
 
 import {
   ErrorHandle
 } from './middlewares/ErrorHandle';
-import initController from './controllers';
+// import initController from './controllers';
 import config from './config';
 
 const app = new Koa();
-const router = new Router();
-
+// const router = new Router();
 // 错误处理 log4js日志
 log4js.configure({
   'appenders': {
@@ -57,7 +64,18 @@ app.context.render = co.wrap(render({
 }));
 
 // 初始化路由
-initController(app, router);
+const container = createContainer();
+app.use(scopePerRequest(container));
+container.loadModules([__dirname+'/models/*.js'], {
+  'formatName': 'camelCase',
+  'resolverOptions': {
+    'lifetime': Lifetime.SCOPED
+  }
+});
+app.use(loadControllers('controllers/*.js', {
+  'cwd': __dirname
+}));
+// initController(app, router);
 
 app.listen(config.port, () => {
   console.log(`server is on ${config.port}`);

@@ -1,21 +1,29 @@
 import {
-  IndexModel
-} from '../models/IndexModel';
+  route,
+  GET
+  // POST,
+  // before
+} from 'awilix-koa';
 
-export class IndexController {
-  constructor() {}
-  indexAction() {
-    return async (ctx) => {
-      ctx.body = 'Hello World!';
-    };
+@route('/home')
+class IndexController {
+  constructor({
+    indexModel
+  }) {
+    this.indexModel = indexModel;
   }
-  homepageAction() {
-    return async (ctx) => {
-      const indexModelIns = new IndexModel();
-      const data = await indexModelIns.getData();
-      ctx.body = await ctx.render('index', {
-        data
-      });
-    };
+  @route('/test')
+  @GET()
+  async indexAction(ctx) {
+    ctx.body = 'Hello World!';
+  }
+  @route('/index')
+  @GET()
+  async homepageAction(ctx) {
+    const data = await this.indexModel.getData();
+    ctx.body = await ctx.render('index', {
+      data
+    });
   }
 }
+export default IndexController;
