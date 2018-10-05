@@ -4,13 +4,13 @@
  * @classdesc 生成一段异步数据
  * @class IndexModel
  */
-export class IndexModel{
+export class IndexModel {
   /**
    * @classdesc Creates an instance of IndexModel.
    * @param {*}
    * @memberof IndexModel
    */
-  constructor(){
+  constructor() {
 
   }
   /**
@@ -20,12 +20,12 @@ export class IndexModel{
    * @example return new Promise
    * @memberof IndexModel
    */
-  getData(){
-    return new Promise((resolve,reject)=>{
-      setTimeout(()=>{
+  getData() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
         resolve('来了一段异步的数据');
-      },1000)
-    })
+      }, 1000);
+    });
   }
 
- }
+}
