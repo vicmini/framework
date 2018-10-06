@@ -1,0 +1,10 @@
+:root{
+  --headerColor:yellowgreen;
+}
+.components-blheader{
+  & h2{
+    color: var(--headerColor);
+    display: flex;
+    background: green;
+  }
+}

@@ -7,6 +7,7 @@ const gulp = require('gulp'),
   replace = require('rollup-plugin-replace'),
   glob = require('glob'),
   gulpSequence = require('gulp-sequence'),
+  //buffer = require('vinyl-buffer'),
   eslint = require('gulp-eslint');
 // shell = require('gulp-shell');
 
@@ -38,11 +39,12 @@ gulp.task('build:prod', () => {
       'plugins': [
         'transform-es2015-modules-commonjs',
         ['@babel/plugin-proposal-decorators', {
-          'legacy': true,
-          'decoratorsBeforeExport':true
+          'legacy': true
+          //'decoratorsBeforeExport':true
         }]
       ]
-    }));
+    }))
+    .pipe(gulp.dest('./dist'));
 });
 
 // 使用nodemon监控文件变化并重启服务
@@ -73,6 +75,7 @@ gulp.task('clean:config', () => {
         })
       ]
     }))
+    // .pipe(buffer())
     .pipe(gulp.dest('./dist'));
 
 });

@@ -5,7 +5,6 @@ import {
   // before
 } from 'awilix-koa';
 
-@route('/home')
 class IndexController {
   constructor({
     indexModel
@@ -21,7 +20,7 @@ class IndexController {
   @GET()
   async homepageAction(ctx) {
     const data = await this.indexModel.getData();
-    ctx.body = await ctx.render('index', {
+    ctx.body = await ctx.render('home/home', {
       data
     });
   }
